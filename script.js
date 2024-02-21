@@ -1,6 +1,9 @@
 let operatorSign;
 let firstNum;
 let secondNum;
+let displayValue;
+const display = document.querySelector("#display");
+const digits = document.querySelector("#digits");
 
 const add = function(firstNum, secondNum) {
     return firstNum + secondNum;
@@ -40,4 +43,12 @@ const operate = function(operator, firstNum, secondNum) {
     return result;
 }
 
-console.log(operate("+", 9, 3));
+digits.addEventListener("click", (e) => {
+    displayValue = e.target.getAttribute("value");
+    populate(displayValue)
+})
+
+const populate = function(displayValue) {
+    display.textContent = displayValue;
+} 
+
