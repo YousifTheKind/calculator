@@ -8,34 +8,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="display"></div>
+    <div class="calculator">
+        <div class="container">
+            <div id="display"></div>
 
-    <div id="digits">
-        <button value="0">0</button> 
-        <button value="1">1</button> 
-        <button value="2">2</button> 
-        <button value="3">3</button> 
-        <button value="4">4</button> 
-        <button value="5">5</button> 
-        <button value="6">6</button> 
-        <button value="7">7</button> 
-        <button value="8">8</button> 
-        <button value="9">9</button> 
-    </div>
+            <div id="digits">
+                <button class="operand" value="7">7</button> 
+                <button class="operand" value="8">8</button> 
+                <button class="operand" value="9">9</button>
+                <button class="operand" value="4">4</button> 
+                <button class="operand" value="5">5</button> 
+                <button class="operand" value="6">6</button>  
+                <button class="operand" value="1">1</button> 
+                <button class="operand" value="2">2</button> 
+                <button class="operand" value="3">3</button> 
+                <button class="operand" value="0">0</button> 
+            </div>
 
-    <div id="operationButton">
-        <button value="+">+</button> 
-        <button value="-">-</button> 
-        <button value="*">*</button> 
-        <button value="/">/</button> 
-    </div>
+            <div id="operationButton">
+                <button class="signButton" value="+">+</button> 
+                <button class="signButton" value="-">-</button> 
+                <button class="signButton" value="*">*</button> 
+                <button class="signButton" value="/">/</button> 
+            </div>
+            
+            <div id="clearButton">
+                <button class="styleClear">Clear</button> 
+            </div>
 
-    <div id="equal">
-        <button>=</button> 
-    </div>
-
-    <div id="clearButton">
-        <button>Clear</button> 
+            <div id="equal">
+                <button class="styleEqual">=</button> 
+            </div>
+        </div>
     </div>
 
 

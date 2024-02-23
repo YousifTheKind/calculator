@@ -9,23 +9,25 @@ const digits = document.querySelector("#digits");
 const operationButton = document.querySelector("#operationButton");
 const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clearButton");
+// functions that does the operations rounds the result then returns it
 
 const add = function(firstNum, secondNum) {
-    return firstNum + secondNum;
+    return Math.round((firstNum + secondNum) * 100) / 100;
 };
 
 const subtract = function(firstNum, secondNum) {
-    return firstNum - secondNum;
+    return Math.round((firstNum - secondNum) * 100) / 100;
 };
 
 const multiply = function(firstNum, secondNum) {
-    return firstNum * secondNum;
+    return Math.round((firstNum * secondNum) * 100) / 100;
 };
 
 const divide = function(firstNum, secondNum) {
-    return (firstNum / secondNum);
+    if(secondNum == 0) return "nice try";
+    return Math.round((firstNum / secondNum) * 100) / 100;
 };
-
+// function that calls the correct function based on inputs
 const operate = function(operator, firstNum, secondNum) {
     let result;
 
@@ -47,39 +49,37 @@ const operate = function(operator, firstNum, secondNum) {
             return "something went wrong!"
     }
 
-    return Math.round(result * 100) / 100;
+    return result;
 };
 
+// displays the display value if it's not NaN or null
 const populate = function(displayValue) {
-
-    if(displayValue == " ") {
+    if(displayValue === " ") {
         display.textContent = " ";
     }
     else if(typeof displayValue === "string" || typeof displayValue === "number") {
-        display.textContent += displayValue
+        displayValue = String(displayValue);
+        display.textContent += displayValue;
     };
 
 };
 
-
+// displays digits upon click
 digits.addEventListener("click", (e) => {
     if(resultOnScreen) {populate(" "); resultOnScreen = false}
-    if(!firstClick) {
-        displayValue = e.target.getAttribute("value");
-        populate(displayValue);
-    }
-    else {
-        displayValue = e.target.getAttribute("value");
-        populate(displayValue);
-    };
+    displayValue = e.target.getAttribute("value");
+    populate(displayValue);
 
 });
+
+// takes what's being displayed as the first number if it's before firstClick
+// otherwise it takes what's displayed as the second number
 operationButton.addEventListener("click", (e) => {
 
     if(firstClick){
         operatorSign = e.target.getAttribute("value")
         firstNum = Number(display.textContent);
-        display.textContent = "";
+        populate(" ");
         firstClick = false;    
     }
     else {
@@ -87,13 +87,15 @@ operationButton.addEventListener("click", (e) => {
         populate(" ");
         let result = operate(operatorSign, firstNum, secondNum);
         populate(result);
+        resultOnScreen = true;
         firstNum = result;
         operatorSign = e.target.getAttribute("value")
     }
 });
 
+ // checks if it's not the first time, meaning first & second numbers hold a value
+
 equal.addEventListener("click", () => {
-    console.log("first click: " + firstClick);
     if(!firstClick) {
         secondNum = Number(display.textContent);
         populate(" ");
@@ -101,13 +103,15 @@ equal.addEventListener("click", () => {
         populate(result);
         firstClick = true;
         resultOnScreen = true;
+        console.log(result);
     }
 });
 
-
+// reset variables
 clear.addEventListener("click", () => {
-    display.textContent = "";
+    populate(" ");
     firstNum = null;
     secondNum = null;
     operatorSign = null;
 });
+
